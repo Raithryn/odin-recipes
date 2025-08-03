@@ -1,0 +1,142 @@
+/*
+            This CSS is designed to create a robust and flexible grid that
+            automatically adjusts based on screen size, preventing overlapping.
+            This single stylesheet is all that is needed.
+        */
+:root {
+	--grid-gap: 20px;
+	--border-color: #ffffff;
+	--border-width: 3px;
+	--card-shadow: 0 5px 15px rgba(0, 0, 0, 0.459);
+}
+
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-image: url(/resources/home-background.png);
+	padding: var(--grid-gap);
+	box-sizing: border-box;
+}
+
+/* --- Main Grid Layout --- */
+
+.grid-container {
+	display: grid;
+	/* This is the key change. 'auto-fit' tells the grid to create as many
+               columns as can fit, and 'minmax(300px, 1fr)' ensures each column
+               is at least 300px wide, and no wider than one fraction of the space.
+               This is the most reliable way to prevent overlapping. */
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: var(--grid-gap);
+	max-width: 900px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* --- Background Image Classes --- */
+
+.stirfried-rice-bg {
+	background-image: url("/resources/stirfry.jpg");
+}
+
+.golden-smores-bg {
+	background-image: url("/resources/goldensmores.jpg");
+}
+
+.trailmix-bg {
+	background-image: url("/resources/trailmix.jpg");
+}
+
+.taco-fillings-bg {
+	background-image: url("/resources/tacofillings.jpg");
+}
+
+/* --- Card Styles --- */
+
+.card-link {
+	display: block;
+	position: relative;
+	text-decoration: none;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: var(--card-shadow);
+	border: var(--border-width) solid var(--border-color);
+	box-sizing: border-box;
+
+	/* Ensures a consistent aspect ratio, which is crucial for uniform card size. */
+	aspect-ratio: 16 / 9;
+}
+
+/* --- Background Image Container --- */
+
+.card-image-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: transform 0.3s ease-in-out;
+	z-index: 1;
+}
+
+/* --- Content Wrapper (The Black Box and Text) --- */
+
+.card-content-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	text-align: center;
+	padding: 10px;
+	transition: transform 0.3s ease-in-out;
+	z-index: 2;
+	box-sizing: border-box;
+}
+
+/* --- Text Styling inside the Black Box --- */
+
+.card-content-wrapper h2 {
+	font-size: 2.2em;
+	margin: 0;
+	line-height: 1.2;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	white-space: normal;
+	word-break: break-word;
+	max-width: 90%;
+}
+
+/* --- Hover, Active, and Focus Effects --- */
+.card-link:hover .card-image-background,
+.card-link:focus .card-image-background,
+.card-link:active .card-image-background {
+	transform: scale(1.1);
+}
+
+.card-link:hover .card-content-wrapper,
+.card-link:focus .card-content-wrapper,
+.card-link:active .card-content-wrapper {
+	transform: scale(1.08);
+}
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 1000px) {
+	.grid-container {
+		grid-template-columns: 1fr; /* Stack cards in a single column on smaller screens. */
+		width: 95%;
+	}
+}
