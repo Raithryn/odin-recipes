@@ -1,0 +1,113 @@
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #f0f0f0;
+}
+
+/* background images */
+.stirfried-rice-bg {
+	background-image: url("/resources/stirfry.jpg");
+}
+
+.golden-smores-bg {
+	background-image: url("/resources/goldensmores.jpg");
+}
+
+.trailmix-bg {
+	background-image: url("/resources/trailmix.jpg");
+}
+
+.taco-fillings-bg {
+	background-image: url("/resources/tacofillings.jpg");
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Two columns, equal width */
+	grid-template-rows: repeat(2, 1fr); /* Two rows, equal height */
+	gap: 20px; /* Space between grid items */
+	max-width: 900px; /* Max width for the entire grid */
+	width: 90%; /* Responsive width */
+	margin: 20px auto; /* Center the grid with some margin */
+}
+
+.card-link {
+	position: relative; /* Essential for positioning inner elements */
+	display: block; /* Make the anchor behave like a block-level div */
+	text-decoration: none; /* Remove underline from links */
+	overflow: hidden; /* Hide anything that scales outside the card's bounds */
+	border-radius: 8px; /* Slightly rounded corners for the card */
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+	aspect-ratio: 16 / 9; /* Maintain aspect ratio (e.g., 16:9 for landscape cards) */
+	min-height: 200px; /* Fallback min-height if aspect-ratio not supported widely or preferred */
+}
+
+/* Background Image Container */
+.card-image-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover; /* Ensures the image covers the entire area */
+	background-position: center; /* Centers the image within its container */
+	background-repeat: no-repeat;
+	transition: transform 0.3s ease-in-out; /* Smooth transition for zoom out */
+	z-index: 1; /* Ensure it's behind the content wrapper */
+}
+
+/* Content Wrapper (the "black box" with text) */
+.card-content-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex; /* Use flexbox to center the text */
+	flex-direction: column; /* Stack text if multiple lines */
+	align-items: center; /* Center horizontally */
+	justify-content: center; /* Center vertically */
+
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.6
+	); /* Semi-transparent black background */
+	border: 2px solid gold; /* The golden border */
+	box-sizing: border-box; /* Include padding and border in the element's total width and height */
+	color: white; /* Text color */
+	text-align: center;
+	padding: 10px; /* Padding inside the black box */
+
+	transition: transform 0.3s ease-in-out; /* Smooth transition for growth */
+	z-index: 2; /* Ensure it's on top of the image */
+}
+
+/* Hover Effects */
+.card-link:hover .card-image-background {
+	transform: scale(1.1); /* Image zooms out by 10% */
+}
+
+.card-link:hover .card-content-wrapper {
+	transform: scale(1.08); /* Black box grows by 8% */
+}
+
+.card-content-wrapper h2 {
+	font-size: 2.2em; /* Adjust as needed */
+	margin: 0; /* Remove default margin */
+	line-height: 1.2;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+	.grid-container {
+		grid-template-columns: 1fr; /* Stack cards in a single column */
+		width: 95%;
+	}
+}
